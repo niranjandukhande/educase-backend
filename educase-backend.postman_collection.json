@@ -1,0 +1,174 @@
+{
+  "info": {
+    "name": "Educase Backend",
+    "description": "Postman collection for the Educase School Management API.\n\nBase URL: https://educase-backend.niranjandukhande.in\n\nRoutes:\n- GET  /health\n- POST /addSchool\n- GET  /listSchools?latitude=...&longitude=...",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["health"]
+        }
+      },
+      "response": [
+        {
+          "name": "200 OK",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["health"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [{ "key": "Content-Type", "value": "application/json" }],
+          "cookie": [],
+          "body": "{\n  \"status\": \"ok\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Add School",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"ABC Public School\",\n  \"address\": \"123 Main St, Pune\",\n  \"latitude\": 18.5204,\n  \"longitude\": 73.8567\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/addSchool",
+          "host": ["{{baseUrl}}"],
+          "path": ["addSchool"]
+        }
+      },
+      "response": [
+        {
+          "name": "201 Created",
+          "originalRequest": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"ABC Public School\",\n  \"address\": \"123 Main St, Pune\",\n  \"latitude\": 18.5204,\n  \"longitude\": 73.8567\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/addSchool",
+              "host": ["{{baseUrl}}"],
+              "path": ["addSchool"]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": "json",
+          "header": [{ "key": "Content-Type", "value": "application/json" }],
+          "cookie": [],
+          "body": "{\n  \"id\": 11,\n  \"name\": \"ABC Public School\",\n  \"address\": \"123 Main St, Pune\",\n  \"latitude\": 18.5204,\n  \"longitude\": 73.8567\n}"
+        },
+        {
+          "name": "400 Validation Error",
+          "originalRequest": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"\",\n  \"address\": \"123 Main St, Pune\",\n  \"latitude\": 100,\n  \"longitude\": 73.8567\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/addSchool",
+              "host": ["{{baseUrl}}"],
+              "path": ["addSchool"]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "header": [{ "key": "Content-Type", "value": "application/json" }],
+          "cookie": [],
+          "body": "{\n  \"error\": \"VALIDATION_ERROR\",\n  \"message\": \"Invalid request\",\n  \"details\": [\n    { \"field\": \"name\", \"message\": \"name is required\" },\n    { \"field\": \"address\", \"message\": \"address is required\" },\n    { \"field\": \"latitude\", \"message\": \"latitude must be between -90 and 90\" }\n  ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "List Schools",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/listSchools?latitude=18.5204&longitude=73.8567",
+          "host": ["{{baseUrl}}"],
+          "path": ["listSchools"],
+          "query": [
+            { "key": "latitude", "value": "18.5204" },
+            { "key": "longitude", "value": "73.8567" }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "200 OK",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/listSchools?latitude=18.5204&longitude=73.8567",
+              "host": ["{{baseUrl}}"],
+              "path": ["listSchools"],
+              "query": [
+                { "key": "latitude", "value": "18.5204" },
+                { "key": "longitude", "value": "73.8567" }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [{ "key": "Content-Type", "value": "application/json" }],
+          "cookie": [],
+          "body": "{\n  \"userLocation\": {\n    \"latitude\": 18.5204,\n    \"longitude\": 73.8567\n  },\n  \"schools\": [\n    {\n      \"id\": 1,\n      \"name\": \"ABC Public School\",\n      \"address\": \"123 Main St, Pune\",\n      \"latitude\": 18.5204,\n      \"longitude\": 73.8567,\n      \"distanceKm\": 0.00032369690167697847\n    },\n    {\n      \"id\": 4,\n      \"name\": \"Cathedral and John Connon School\",\n      \"address\": \"Fort, Mumbai\",\n      \"latitude\": 18.9322,\n      \"longitude\": 72.8354,\n      \"distanceKm\": 116.89247864794393\n    }\n  ]\n}"
+        },
+        {
+          "name": "400 Validation Error",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/listSchools?latitude=999&longitude=0",
+              "host": ["{{baseUrl}}"],
+              "path": ["listSchools"],
+              "query": [
+                { "key": "latitude", "value": "999" },
+                { "key": "longitude", "value": "0" }
+              ]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "header": [{ "key": "Content-Type", "value": "application/json" }],
+          "cookie": [],
+          "body": "{\n  \"error\": \"VALIDATION_ERROR\",\n  \"message\": \"Invalid request\",\n  \"details\": [\n    { \"field\": \"latitude\", \"message\": \"latitude must be between -90 and 90\" }\n  ]\n}"
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://educase-backend.niranjandukhande.in"
+    }
+  ]
+}
