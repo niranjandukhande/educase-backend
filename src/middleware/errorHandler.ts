@@ -1,11 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
 import { ZodError } from "zod";
 
-export type ValidationDetail = {
-  field: string;
-  message: string;
-};
-
 export class AppError extends Error {
   public readonly statusCode: number;
   public readonly errorCode: string;
