@@ -15,6 +15,17 @@ export function createServerApplication(): Application {
   app.use(express.json());
   app.use(morgan("dev"));
 
+  app.get("/", (_req, res) => {
+    return res.json({
+      name: "Educase Backend (School APIs)",
+      endpoints: {
+        health: "GET /health",
+        addSchool: "POST /addSchool",
+        listSchools: "GET /listSchools?latitude=...&longitude=...",
+      },
+    });
+  });
+
   app.get("/health", (_req, res) => {
     return res.json({ status: "ok" });
   });
