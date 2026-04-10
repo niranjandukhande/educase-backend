@@ -1,0 +1,21 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: educase-mysql-backend
+    environment:
+      MYSQL_ROOT_PASSWORD: educase
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_DATABASE: educase
+    ports:
+      - "3306:3306"
+    volumes:
+      - educase_mysql_data:/var/lib/mysql
+    healthcheck:
+      test:
+        ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-peducase"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  educase_mysql_data:
