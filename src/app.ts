@@ -3,6 +3,8 @@ import type { Application } from "express";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
+import { notFound } from "./middleware/notFound.js";
+import { errorHandler } from "./middleware/errorHandler.js";
 
 export function createServerApplication(): Application {
   const app = express();
@@ -15,6 +17,9 @@ export function createServerApplication(): Application {
   app.get("/health", (_req, res) => {
     return res.json({ status: "ok" });
   });
+
+  app.use(notFound);
+  app.use(errorHandler);
 
   return app;
 }
